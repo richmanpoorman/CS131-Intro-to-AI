@@ -1,0 +1,39 @@
+Name      : Matthew Wong
+Project   : Behavior Trees (Homework 1)
+Due Date  : 28 September 2022
+Edit Date : 26 September 2022
+
+Purpose:
+The purpose of this project is to simulate a vacuum cleaner AI using behaviour tree logic. The project is a practice of using Tasks, Conditionals, Composites and Decorators.
+
+Assumptions:
+When there is a conditional, it will ask the user for input, except for Battery Level. Battery Level is set at the beginning (which is assumed to be an integer input), and it is assumed that 1 battery point is used per loop, removed at the evaluation stage of battery level. It is also assumed that the max battery level is 100. When prompted for a true of false question, (denoted by (True or False)) and is assumed that the input will be "true", "True", "false", or "False". It is also assumed that there are an infinite amount of evaluation loops, as there is no terminator command. The timer only evaluates as SUCCESS when the timer has gone past 0, not the moment it reaches 0. The home path can be any string when prompted, and will just print the path when it is going home.
+
+Blackboard:
+    "battery"          : The battery level
+    "spotCleaning"     : Whether or not it is doing spot cleaning
+    "generalCleaning"  : Whether or not it is doing general cleaning
+    "dustySpot"        : Whether the "sensor" sees dust
+
+    "homePath"         : Stored path home
+    "timer"            : Timer for the timer variable; set at -1 when not in use
+    "timerRunning"     : Whether or not the timer is still running
+
+Tasks:
+    FindHome    : Asks and stores a home path from the user
+    GoHome      : Prints out the stored path
+    Dock        : Prints out docked, and sets the battery level to 100
+
+    CleanSpot   : Will return SUCCESS if there is dust and print "Cleaning Dust"; return FAILED otherwise and print "Clean Spot"
+    DoneSpot    : Will return SUCCESS and print "Done Spot", as well as set dusty spot and spot cleaning to false
+
+    CleanFloor  : Will return SUCCESS based off a random number generator, and FAILED (FAILED with a 1/100 chance)
+    DoneGeneral : Will print "Done General" and set general clean to false
+
+    DoNothing   : Prints "Do Nothing :(" and returns SUCCESS
+
+Conditionals:
+    BatteryCheck    : Returns SUCCESS if the battery is less than or equal to 30, FAILED otherwise
+    SpotCleaning    : Returns SUCCESS if spot cleaning   , FAILED otherwise (asks for user input)
+    DustySpot       : Returns SUCCESS if is dusty spot   , FAILED otherwise (asks for user input)
+    GeneralCleaning : Returns SUCCESS if general cleaning, FAILED otherwise (asks for user input)
